@@ -4,8 +4,8 @@ import { bunzz } from "bunzz-sdk";
 import "./App.css";
 
 // configuration
-const API_KEY = "91965616-bf7e-4bde-97ea-a39c31980635";
-const DAPP_ID = "d3779a9c-bf13-4842-b3e7-2328ffa2d7d4";
+const DAPP_ID = "YOUR_DAPP_ID";
+const API_KEY = "YOUR_API_KEY";
 
 const init = async () => {
   const handler = await bunzz.initializeHandler({
