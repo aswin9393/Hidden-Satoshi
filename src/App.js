@@ -16,6 +16,7 @@ const init = async () => {
 };
 
 
+
 // Application
 const App = () => {
   const [contract, setContract] = useState();
@@ -40,7 +41,8 @@ const App = () => {
   const handleChange = (e) => setValue(e.target.value);
 
   const submit = async () => {
-    const tx = contract.mint(userAddress, value);
+    await contract.mint(userAddress, value);
+    alert("Transaction was sent in success🎉");
   };
 
   return (
