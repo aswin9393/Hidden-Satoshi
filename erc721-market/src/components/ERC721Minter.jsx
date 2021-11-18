@@ -72,7 +72,6 @@ export const ERC721Minter = ({ bunzz, userAddress }) => {
     try {
       const metadata = await store(name, description, blob, type, base64);
       console.log("url", metadata.url);
-      // const contract = await bunzz.getContract("ERC721 IPFS Mintable");
       const contract = await bunzz.getContract("NFT (IPFS Mintable)");
       const inputUrl = metadata.url.replace(/^ipfs:\/\//, "");
       console.log(inputUrl);
