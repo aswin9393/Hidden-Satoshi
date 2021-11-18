@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Center, Flex } from "@chakra-ui/react";
 
 import { Setup } from "./components/Setup.jsx";
-import { ERC20Minter } from "./components/ERC20.jsx";
-// import { ERC721Minter } from "./components/ERC721Minter.jsx";
+// import { ERC20Minter } from "./components/ERC20.jsx";
+import { ERC721Minter } from "./components/ERC721Minter.jsx";
 import { ERC721Checker } from "./components/ERC721Checker.jsx";
 
 const App = () => {
