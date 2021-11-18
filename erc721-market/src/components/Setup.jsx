@@ -60,7 +60,6 @@ export const Setup = ({ setUserAddress, setBunzz }) => {
       <Input
         value={apiKey}
         placeholder="API Key"
-        onChange={(e) => setDappId(e.target.value)}
         onChange={(e) => setApiKey(e.target.value)}
         type="text"
       />
