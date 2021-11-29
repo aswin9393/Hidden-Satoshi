@@ -3,6 +3,7 @@ import {
   Button,
   Center,
   CircularProgress,
+  FormLabel,
   Input,
   Text,
   VStack,
@@ -10,6 +11,9 @@ import {
 import type { NextPage } from "next";
 import React from "react";
 import { useCreateItem } from "../hooks/useCreateItem";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import styles from "../styles/Home.module.css";
 
 const Page: NextPage = () => {
   const {
@@ -17,9 +21,17 @@ const Page: NextPage = () => {
     description,
     base64,
     isLoading,
+    buyoutPrice,
+    startingPrice,
+    startDate,
+    endDate,
     tokenId,
     setName,
     setDescription,
+    setStartingPrice,
+    setBuyoutPrice,
+    setStartDate,
+    setEndDate,
     select,
     submit,
     sell,
@@ -27,26 +39,74 @@ const Page: NextPage = () => {
 
   return (
     <VStack direction="column" margin="100px auto" spacing="20px" w="500px">
-      <Input
-        placeholder="Token Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        type="text"
-      />
-      <Input
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        type="text"
-      />
-      <Input type="file" accept="image/*" onChange={select} />
-      {base64 ? (
-        <Box boxSize="sm" w="200px">
-          <img src={base64} width="200px" alt="NFTの画像" />
-        </Box>
-      ) : (
-        <></>
-      )}
+      <Box w="100%">
+        <FormLabel>Token Name</FormLabel>
+        <Input
+          placeholder="My NFT"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          type="text"
+        />
+      </Box>
+      <Box w="100%">
+        <FormLabel>Description</FormLabel>
+        <Input
+          placeholder="My NFT's description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          type="text"
+        />
+      </Box>
+      <Box w="100%">
+        <FormLabel>Starting Price</FormLabel>
+        <Input
+          placeholder="Starting Price"
+          value={startingPrice}
+          onChange={(e) => setStartingPrice(Number(e.target.value))}
+          type="number"
+          min={0}
+        />
+      </Box>
+      <Box w="100%">
+        <FormLabel>Buyout Price</FormLabel>
+        <Input
+          placeholder="Buyout Price"
+          value={buyoutPrice}
+          onChange={(e) => setBuyoutPrice(Number(e.target.value))}
+          type="number"
+          min={0}
+        />
+      </Box>
+
+      <Box w="100%">
+        <FormLabel>Start Date</FormLabel>
+        <DatePicker
+          className={styles.date_picker}
+          selected={startDate}
+          onChange={(date: Date) => setStartDate(date)}
+          minDate={new Date()}
+        />
+      </Box>
+
+      <Box w="100%">
+        <FormLabel>End Date</FormLabel>
+        <DatePicker
+          className={styles.date_picker}
+          selected={endDate}
+          onChange={(date: Date) => setEndDate(date)}
+          minDate={new Date()}
+        />
+      </Box>
+
+      <Box w="100%">
+        <FormLabel>Image</FormLabel>
+        <Input type="file" accept="image/*" onChange={select} />
+        {base64 && (
+          <Box boxSize="sm" w="200px">
+            <img src={base64} width="200px" alt="NFTの画像" />
+          </Box>
+        )}
+      </Box>
       {isLoading ? (
         <Center>
           <CircularProgress isIndeterminate />

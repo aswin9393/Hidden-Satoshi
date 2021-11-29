@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
+import { Flex, Grid } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { ItemCard } from "../components/itemCard/ItemCard";
 import { useNotSoldItems } from "../hooks/useNotSoldItems";

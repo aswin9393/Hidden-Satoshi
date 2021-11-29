@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import { Header } from "../components/header/Header";

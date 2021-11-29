@@ -36,9 +36,16 @@ export const useCreateItem = () => {
   const [base64, setBase64] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [tokenId, setTokenId] = useState("");
+
+  // Form values
   const [type, setType] = useState<File["type"]>();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [startingPrice, setStartingPrice] = useState(0);
+  const [buyoutPrice, setBuyoutPrice] = useState(0);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+
   const [handler] = useAtom(handlerAtom);
   const [userAddress] = useAtom(userAddressAtom);
   const [nftContract] = useAtom(nftContractAtom);
@@ -136,14 +143,20 @@ export const useCreateItem = () => {
       if (!handler || !marketContract) return;
 
       // Sell NFT to marketplace
-      const buyoutPrice = ethers.utils.parseUnits("1", "ether");
-      const startingPrice = ethers.utils.parseUnits("0.4", "ether");
-      const auctionStartDateTS = new Date("2021-11-28").getTime() / 1000;
-      const auctionEndDateTS = new Date("2021-11-30").getTime() / 1000;
+      const buyoutPriceEther = ethers.utils.parseUnits(
+        buyoutPrice.toString(),
+        "ether"
+      );
+      const startingPriceEther = ethers.utils.parseUnits(
+        startingPrice.toString(),
+        "ether"
+      );
+      const auctionStartDateTS = startDate.getTime() / 1000;
+      const auctionEndDateTS = endDate.getTime() / 1000;
       const tx = await marketContract.createAuction(
         tokenId,
-        buyoutPrice,
-        startingPrice,
+        buyoutPriceEther,
+        startingPriceEther,
         auctionStartDateTS,
         auctionEndDateTS
       );
@@ -163,11 +176,19 @@ export const useCreateItem = () => {
   return {
     name,
     description,
+    startingPrice,
+    buyoutPrice,
+    startDate,
+    endDate,
     isLoading,
     base64,
     tokenId,
     setName,
     setDescription,
+    setBuyoutPrice,
+    setStartingPrice,
+    setStartDate,
+    setEndDate,
     select,
     submit,
     sell,

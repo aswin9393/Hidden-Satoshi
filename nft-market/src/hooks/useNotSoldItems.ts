@@ -10,6 +10,8 @@ export type Item = {
   name: string;
   description: string;
   image: string;
+  endDate: Date;
+  startDate: Date;
 };
 
 export const useNotSoldItems = () => {
@@ -26,6 +28,7 @@ export const useNotSoldItems = () => {
 
     try {
       const { response: contractRes } = await marketContract._getMarketItems();
+      console.log(contractRes);
 
       const items: Item[] = await Promise.all(
         contractRes.map(async (item: any) => {
@@ -38,16 +41,28 @@ export const useNotSoldItems = () => {
             "ether"
           );
           const tokenId = ethers.utils.formatUnits(item.tokenId._hex, 0);
+          const endDateTS = ethers.utils.formatUnits(
+            item.auctionEndBlock._hex,
+            0
+          );
+          const startDateTS = ethers.utils.formatUnits(
+            item.auctionStartBlock._hex,
+            0
+          );
+          const endDate = new Date(Number(endDateTS) * 1000);
+          const startDate = new Date(Number(startDateTS) * 1000);
           const { response: tokenUri } = await nftContract.tokenURI(tokenId);
           const url = tokenUri.replace(/^ipfs:\/\//, "https://ipfs.io/ipfs/");
           const res = await fetch(url);
           const data = await res.json();
-          console.log(data);
+          console.log(new Date(Number(endDate) * 1000));
 
           return {
             tokenId,
             buyoutPrice,
             startingPrice,
+            startDate,
+            endDate,
             name: data.name,
             description: data.description,
             image: data.base64,
