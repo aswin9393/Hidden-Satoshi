@@ -1,5 +1,6 @@
 import { Flex, Grid } from "@chakra-ui/react";
 import type { NextPage } from "next";
+import Link from "next/link";
 import { ItemCard } from "../components/itemCard/ItemCard";
 import { useNotSoldItems } from "../hooks/useNotSoldItems";
 
@@ -10,7 +11,11 @@ const Page: NextPage = () => {
     <Flex justifyContent="center" marginTop="40px">
       <Grid templateColumns="repeat(3, 1fr)" gap="6" width="80%">
         {items?.map((item) => (
-          <ItemCard item={item} key={item.tokenId} />
+          <Link href={`/assets/${item.tokenId}`} key={item.tokenId}>
+            <a>
+              <ItemCard item={item} />
+            </a>
+          </Link>
         ))}
       </Grid>
     </Flex>

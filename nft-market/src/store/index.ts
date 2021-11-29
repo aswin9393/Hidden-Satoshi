@@ -1,5 +1,4 @@
 import { Handler } from "bunzz-sdk";
-import { ethers } from "ethers";
 import { atom } from "jotai";
 import { BunzzContractExtended } from "../../../../bunzz/bunzz-sdk/dist/domain/contract/bunzzContract";
 
