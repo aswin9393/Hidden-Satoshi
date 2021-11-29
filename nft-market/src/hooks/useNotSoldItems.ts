@@ -55,7 +55,6 @@ export const useNotSoldItems = () => {
           const url = tokenUri.replace(/^ipfs:\/\//, "https://ipfs.io/ipfs/");
           const res = await fetch(url);
           const data = await res.json();
-          console.log(new Date(Number(endDate) * 1000));
 
           return {
             tokenId,

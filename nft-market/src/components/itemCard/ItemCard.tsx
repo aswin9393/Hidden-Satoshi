@@ -2,7 +2,7 @@ import { Box, Text } from "@chakra-ui/react";
 import { VFC } from "react";
 import { Item } from "../../hooks/useNotSoldItems";
 import Image from "next/image";
-import { formatDate } from "../../utils/formatDate";
+import { formatDate } from "../../utils/date";
 
 type Props = {
   item: Item;

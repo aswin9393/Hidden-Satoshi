@@ -9,6 +9,11 @@ import {
   nftContractAtom,
   userAddressAtom,
 } from "../store";
+import {
+  getUnixTimestamp,
+  setEndTimeOfDate,
+  setStartTimeOfDate,
+} from "../utils/date";
 
 const nftStorage = new NFTStorage({
   token: process.env.NEXT_PUBLIC_NFT_STORAGE_KEY ?? "",
@@ -151,8 +156,11 @@ export const useCreateItem = () => {
         startingPrice.toString(),
         "ether"
       );
-      const auctionStartDateTS = startDate.getTime() / 1000;
-      const auctionEndDateTS = endDate.getTime() / 1000;
+      const _startDate = setStartTimeOfDate(startDate);
+      const _endDate = setEndTimeOfDate(endDate);
+
+      const auctionStartDateTS = getUnixTimestamp(_startDate);
+      const auctionEndDateTS = getUnixTimestamp(_endDate);
       const tx = await marketContract.createAuction(
         tokenId,
         buyoutPriceEther,

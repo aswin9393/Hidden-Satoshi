@@ -8,7 +8,7 @@ const Page: NextPage = () => {
 
   return (
     <Flex justifyContent="center" marginTop="40px">
-      <Grid templateColumns="repeat(5, 1fr)" gap="6" width="80%">
+      <Grid templateColumns="repeat(3, 1fr)" gap="6" width="80%">
         {items?.map((item) => (
           <ItemCard item={item} key={item.tokenId} />
         ))}
