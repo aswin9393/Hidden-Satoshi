@@ -4,6 +4,7 @@ import {
   Center,
   CircularProgress,
   FormLabel,
+  Heading,
   Input,
   Text,
   VStack,
@@ -38,7 +39,11 @@ const Page: NextPage = () => {
   } = useCreateItem();
 
   return (
-    <VStack direction="column" margin="100px auto" spacing="20px" w="500px">
+    <VStack direction="column" margin="40px auto" spacing="20px" w="500px">
+      <Heading as="h1" mb="40px">
+        Create new item
+      </Heading>
+
       <Box w="100%">
         <FormLabel>Token Name</FormLabel>
         <Input

@@ -8,7 +8,7 @@ const Page: NextPage = () => {
   const { items } = useNotSoldItems();
 
   return (
-    <Flex justifyContent="center" marginTop="40px">
+    <Flex justifyContent="center" marginY="40px">
       {items ? (
         <Grid templateColumns="repeat(3, 1fr)" gap="6" width="80%">
           {items.map((item) => (

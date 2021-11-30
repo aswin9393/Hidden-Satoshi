@@ -2,17 +2,7 @@ import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { fetchMetadata } from "../helper/fetchMetadata";
 import { marketContractAtom, nftContractAtom } from "../store";
-
-export type Item = {
-  tokenId: number;
-  buyoutPrice: number;
-  startingPrice: number;
-  name: string;
-  description: string;
-  image: string;
-  endDate: Date;
-  startDate: Date;
-};
+import { Item } from "../types/type";
 
 export const useNotSoldItems = () => {
   const [marketContract] = useAtom(marketContractAtom);
