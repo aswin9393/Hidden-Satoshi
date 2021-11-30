@@ -84,7 +84,6 @@ const Page: NextPage = () => {
           className={styles.date_picker}
           selected={startDate}
           onChange={(date: Date) => setStartDate(date)}
-          minDate={new Date()}
         />
       </Box>
 

@@ -181,6 +181,10 @@ export const useCreateItem = () => {
     }
   };
 
+  const _startDate = setStartTimeOfDate(startDate);
+  const auctionStartDateTS = getUnixTimestamp(_startDate);
+  console.log(auctionStartDateTS);
+
   return {
     name,
     description,

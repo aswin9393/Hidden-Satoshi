@@ -23,10 +23,11 @@ export const useItemDetails = () => {
     const { response: contractRes } = await marketContract.getAuctionForTokenId(
       tokenId
     );
-
     const item = await fetchMetadata(contractRes, nftContract);
     setItem(item);
   };
 
-  return { item };
+  return {
+    item,
+  };
 };

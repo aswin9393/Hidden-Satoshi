@@ -4,12 +4,17 @@ import React from "react";
 import { useItemDetails } from "../../hooks/useItemDetails";
 import Image from "next/image";
 import { formatDate } from "../../utils/date";
+import { OfferModal } from "../../components/modal/OfferModal";
+import { useOffer } from "../../hooks/useOffer";
 
 const Page: NextPage = () => {
   const { item } = useItemDetails();
+  const offer = useOffer(item?.tokenId || 0);
 
   return (
     <Flex justifyContent="center" marginTop="40px">
+      <OfferModal {...offer} />
+
       {item ? (
         <Flex w="80%">
           <Box mr="60px" border="1px solid rgba(0,0,0,0.1)" borderRadius="8px">
@@ -61,7 +66,11 @@ const Page: NextPage = () => {
               bgColor="rgb(243 246 249)"
               textAlign="center"
             >
-              <Button colorScheme="blue" size="lg">
+              <Button
+                colorScheme="blue"
+                size="lg"
+                onClick={offer.makeOfferModal.onOpen}
+              >
                 Make offer
               </Button>
             </Box>
