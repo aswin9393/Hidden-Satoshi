@@ -29,17 +29,33 @@ export const useOffer = (tokenId: number): UseOfferReturns => {
     try {
       setIsOfferLoading(true);
       const _ether = ethers.utils.parseEther(String(ether));
+      const { response: contractRes } =
+        await marketContract.getAuctionForTokenId(tokenId);
+      const buyoutPrice = Number(
+        ethers.utils.formatUnits(contractRes.buyoutPrice._hex, "ether")
+      );
+
       const tx = await marketContract.addBid(tokenId, { value: _ether });
       await tx.wait();
       setError("");
       setBids((bids) => [...bids, { amount: ether, proposer: userAddress }]);
       makeOfferModal.onClose();
-      toast({
-        status: "success",
-        title: "Success to make offer!",
-        position: "top-right",
-        isClosable: true,
-      });
+
+      if (buyoutPrice === ether) {
+        toast({
+          status: "success",
+          title: "You got this NFT🎉",
+          position: "top-right",
+          isClosable: true,
+        });
+      } else {
+        toast({
+          status: "success",
+          title: "Success to make offer!",
+          position: "top-right",
+          isClosable: true,
+        });
+      }
     } catch (error) {
       setError(error.data.message);
       console.error(error);
