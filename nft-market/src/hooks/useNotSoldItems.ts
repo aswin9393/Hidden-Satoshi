@@ -2,12 +2,13 @@ import { useAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { fetchMetadata } from "../helper/fetchMetadata";
 import { marketContractAtom, nftContractAtom } from "../store";
-import { Item } from "../types/type";
+import { Auction, Metadata } from "../types/type";
+import { convertAuction } from "./useItemDetails";
 
 export const useNotSoldItems = () => {
   const [marketContract] = useAtom(marketContractAtom);
   const [nftContract] = useAtom(nftContractAtom);
-  const [items, setItems] = useState<Item[]>();
+  const [auctions, setAuctions] = useState<Auction[]>();
 
   useEffect(() => {
     fetchItems();
@@ -17,20 +18,24 @@ export const useNotSoldItems = () => {
     if (!marketContract || !nftContract) return;
 
     try {
-      const { response: contractRes } = await marketContract._getMarketItems();
+      const { response: contractRes } = await marketContract.getMarketItems();
       console.log(contractRes);
 
-      const items: Item[] = await Promise.all(
-        contractRes.map((item: any) => fetchMetadata(item, nftContract))
+      const items: Auction[] = await Promise.all(
+        contractRes.map(async (auction: any) => {
+          const metadata = await fetchMetadata(auction, nftContract);
+          const _auction = convertAuction(metadata, auction);
+          return _auction;
+        })
       );
 
-      setItems(items);
+      setAuctions(items);
     } catch (error) {
       console.error(error);
     }
   };
 
   return {
-    items,
+    auctions,
   };
 };

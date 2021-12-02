@@ -14,8 +14,8 @@ export const Header: VFC = () => {
           <NextLink href="/create-item">
             <Link fontWeight="bold">Sell Digital Asset</Link>
           </NextLink>
-          <NextLink href="/creator-dashboard">
-            <Link fontWeight="bold">Creator Dashboard</Link>
+          <NextLink href="/my-nfts">
+            <Link fontWeight="bold">My NFTs</Link>
           </NextLink>
         </HStack>
       </Flex>

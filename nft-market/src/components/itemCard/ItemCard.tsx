@@ -1,8 +1,7 @@
-import { Box, Text } from "@chakra-ui/react";
-import { VFC } from "react";
-import { Item } from "../../hooks/useNotSoldItems";
+import React, { VFC } from "react";
+import { Item } from "../../types/type";
 import Image from "next/image";
-import { formatDate } from "../../utils/date";
+import { Box, Text } from "@chakra-ui/layout";
 
 type Props = {
   item: Item;
@@ -10,18 +9,11 @@ type Props = {
 
 export const ItemCard: VFC<Props> = ({ item }) => {
   return (
-    <Box boxShadow="md" rounded="md" width="335px" minHeight="480px">
+    <Box boxShadow="md" rounded="md" width="335px" minHeight="400px">
       <Image src={item.image} height="335px" width="335px" />
       <Box padding="10px">
         <Text fontWeight="bold">{item.name}</Text>
         <Text>{item.description}</Text>
-        <Text fontSize="13px" marginTop="px">
-          Starting Price: {item.startingPrice}
-        </Text>
-        <Text fontSize="13px">Buyout Price: {item.buyoutPrice}</Text>
-        <Text fontSize="13px">
-          End Date: {formatDate(item.endDate, "yyyy/MM/dd")}
-        </Text>
       </Box>
     </Box>
   );

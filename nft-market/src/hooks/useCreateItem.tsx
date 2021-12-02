@@ -112,16 +112,10 @@ export const useCreateItem = () => {
       let tx = await nftContract.safeMint(userAddress, inputUrl);
       const ethersTx = tx.ethersTx;
       const receipt = await ethersTx.wait();
-      // const receipt = await tx.wait();
       const event = receipt.events[0];
       const _tokenId = event.args[2].toString();
       setTokenId(_tokenId);
       setBase64("");
-      tx = await nftContract.approve(
-        marketContract.etherContract.address,
-        _tokenId
-      );
-      await tx.wait();
       tx = await nftContract["safeTransferFrom(address,address,uint256)"](
         userAddress,
         marketContract.etherContract.address,
@@ -145,7 +139,7 @@ export const useCreateItem = () => {
 
   const sell = async () => {
     try {
-      if (!handler || !marketContract) return;
+      if (!handler || !marketContract || !nftContract) return;
 
       // Sell NFT to marketplace
       const buyoutPriceEther = ethers.utils.parseUnits(
@@ -161,7 +155,7 @@ export const useCreateItem = () => {
 
       const auctionStartDateTS = getUnixTimestamp(_startDate);
       const auctionEndDateTS = getUnixTimestamp(_endDate);
-      const tx = await marketContract.createAuction(
+      let tx = await marketContract.createAuction(
         tokenId,
         buyoutPriceEther,
         startingPriceEther,
@@ -180,10 +174,6 @@ export const useCreateItem = () => {
       console.error(err);
     }
   };
-
-  const _startDate = setStartTimeOfDate(startDate);
-  const auctionStartDateTS = getUnixTimestamp(_startDate);
-  console.log(auctionStartDateTS);
 
   return {
     name,

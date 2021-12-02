@@ -21,14 +21,14 @@ import { OfferModal } from "../../components/modal/OfferModal";
 import { useOffer } from "../../hooks/useOffer";
 
 const Page: NextPage = () => {
-  const { item, bids } = useItemDetails();
-  const offer = useOffer(item?.tokenId || 0);
+  const { auction, bids } = useItemDetails();
+  const offer = useOffer(auction?.tokenId || 0);
 
   return (
     <Flex justifyContent="center" marginY="40px">
       <OfferModal {...offer} />
 
-      {item ? (
+      {auction ? (
         <Flex w="80%">
           <Box
             mr="60px"
@@ -36,16 +36,16 @@ const Page: NextPage = () => {
             borderRadius="8px"
             h="fit-content"
           >
-            <Image src={item.image} height="335px" width="335px" />
+            <Image src={auction.image} height="335px" width="335px" />
           </Box>
 
           <Box w="100%">
             <Box>
               <Text fontSize="4xl" fontWeight="bold" mb="10px">
-                {item.name}
+                {auction.name}
               </Text>
               <Text fontSize="lg" mb="20px">
-                {item.description}
+                {auction.description}
               </Text>
             </Box>
             <Box
@@ -56,9 +56,9 @@ const Page: NextPage = () => {
               mb="10px"
             >
               <Text fontSize="lg">
-                Starting Price: {item.startingPrice} ETH
+                Starting Price: {auction.startingPrice} ETH
               </Text>
-              <Text fontSize="lg">Buyout Price: {item.buyoutPrice} ETH</Text>
+              <Text fontSize="lg">Buyout Price: {auction.buyoutPrice} ETH</Text>
             </Box>
 
             <Box
@@ -69,10 +69,10 @@ const Page: NextPage = () => {
               mb="10px"
             >
               <Text fontSize="lg">
-                Start Date: {formatDate(item.startDate, "yyyy/MM/dd")}
+                Start Date: {formatDate(auction.startDate, "yyyy/MM/dd")}
               </Text>
               <Text fontSize="lg">
-                End Date: {formatDate(item.endDate, "yyyy/MM/dd")}
+                End Date: {formatDate(auction.endDate, "yyyy/MM/dd")}
               </Text>
             </Box>
 
@@ -88,8 +88,9 @@ const Page: NextPage = () => {
                 colorScheme="blue"
                 size="lg"
                 onClick={offer.makeOfferModal.onOpen}
+                isDisabled={auction.sold}
               >
-                Make offer
+                {auction.sold ? "Sold out" : "Make offer"}
               </Button>
             </Box>
 

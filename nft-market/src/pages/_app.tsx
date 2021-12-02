@@ -13,8 +13,8 @@ import {
   userAddressAtom,
 } from "../store";
 
-const DAPP_ID = "8e604c6a-4da3-4996-b3ca-7c6639a5f202";
-const API_KEY = "b2d998ac-36d5-45a1-83fa-0ecbd21fb53a";
+const DAPP_ID = "fb7fffb1-aa34-4927-a64b-6cfc6f4af2bb";
+const API_KEY = "f18fd752-ae6a-4c96-b63c-082570f513a7";
 
 function MyApp({ Component, pageProps }: AppProps<{ userAddress: string }>) {
   const [, setUserAddress] = useAtom(userAddressAtom);
