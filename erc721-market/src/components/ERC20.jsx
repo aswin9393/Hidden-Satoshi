@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Flex, Button, Input, Text } from "@chakra-ui/react";
 
 export const ERC20Minter = ({ bunzz, userAddress }) => {
   const [value, setValue] = useState(0);
@@ -12,14 +11,14 @@ export const ERC20Minter = ({ bunzz, userAddress }) => {
   };
 
   return (
-    <Flex direction="column" margin="30px" justify="space-evenly">
-      <Text>You can mint your ERC20 if you're the owner</Text>
-      <Input
+    <div className="wrapper">
+      <p>You can mint your ERC20 if you're the owner</p>
+      <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
         type="text"
       />
-      <Button onClick={submit}>mint</Button>
-    </Flex>
+      <button onClick={submit}>mint</button>
+    </div>
   );
 };

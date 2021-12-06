@@ -1,15 +1,4 @@
 import { useState } from "react";
-import {
-  Flex,
-  Button,
-  Input,
-  Text,
-  Box,
-  Image,
-  Center,
-  CircularProgress,
-  useToast,
-} from "@chakra-ui/react";
 import { NFTStorage, File } from "nft.storage";
 
 const nftStorage = new NFTStorage({
@@ -35,8 +24,6 @@ export const ERC721Minter = ({ bunzz, userAddress }) => {
   const [type, setType] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-
-  const toast = useToast();
 
   const select = (e) => {
     console.log("hello");
@@ -83,13 +70,7 @@ export const ERC721Minter = ({ bunzz, userAddress }) => {
       const _tokenId = event.args[2].toString();
       setTokenId(_tokenId);
       setBase64(null);
-      toast({
-        title: "Succeeded to mint",
-        description: "Transaction was sent in success🎉",
-        status: "success",
-        position: "top-right",
-        isClosable: true,
-      });
+      window.alert("Succeeded to mint");
     } catch (err) {
       console.error(err);
     } finally {
@@ -98,40 +79,38 @@ export const ERC721Minter = ({ bunzz, userAddress }) => {
   };
 
   return (
-    <Flex direction="column" margin="30px" justify="space-evenly">
-      <Text fontSize="xl" marginTop="20px">
-        Step2: Mint your NFT with IPFS
-      </Text>
-      <Input
+    <div className="wrapper">
+      <p className="title">
+        Step1: Mint your NFT with IPFS
+      </p>
+      <input
         placeholder="Token Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
         type="text"
       />
-      <Input
+      <input
         placeholder="Description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         type="text"
       />
-      <Input type="file" accept="image/*" onChange={select} />
+      <input type="file" accept="image/*" onChange={select} />
       {base64 ? (
-        <Box boxSize="sm">
-          <Image src={base64} alt="hoge" />
-        </Box>
+          <img src={base64} alt="hoge" className="image" />
       ) : (
         <></>
       )}
       {onGoing ? (
-        <Center>
-          <CircularProgress isIndeterminate />
-        </Center>
+        <div className="center">
+          Loading...
+        </div>
       ) : (
-        <Button colorScheme="blue" onClick={submit}>
+        <button onClick={submit}>
           mint
-        </Button>
+        </button>
       )}
-      {tokenId ? <Text>token ID: {tokenId}</Text> : <></>}
-    </Flex>
+      {tokenId ? <p>token ID: {tokenId}</p> : <></>}
+    </div>
   );
 };

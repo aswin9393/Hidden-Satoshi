@@ -1,14 +1,4 @@
 import { useState } from "react";
-import {
-  Flex,
-  Button,
-  Input,
-  Text,
-  Box,
-  Image,
-  Center,
-  CircularProgress,
-} from "@chakra-ui/react";
 
 export const ERC721Checker = ({ bunzz, userAddress }) => {
   const [base64, setBase64] = useState(null);
@@ -36,34 +26,32 @@ export const ERC721Checker = ({ bunzz, userAddress }) => {
   };
 
   return (
-    <Flex direction="column" margin="30px" justify="space-evenly">
-      <Text fontSize="xl" marginTop="20px">
-        Step3: Get your NFT
-      </Text>
-      <Input
+    <div className="wrapper">
+      <p className="title">
+        Step2: Get your NFT
+      </p>
+      <input
         placeholder="token ID"
         value={tokenId}
         onChange={(e) => setTokenId(e.target.value)}
         type="text"
       />
       {onGoing ? (
-        <Center>
-          <CircularProgress isIndeterminate />
-        </Center>
+        <div className="center">
+          Loading...
+        </div>
       ) : (
-        <Button colorScheme="blue" onClick={submit}>
+        <button onClick={submit}>
           get
-        </Button>
+        </button>
       )}
       {base64 ? (
-        <Box boxSize="sm">
-          <Image src={base64} alt="hoge" />{" "}
-        </Box>
+          <img src={base64} alt="hoge" className="image" />
       ) : (
         <></>
       )}
-      {name ? <Text>Name: {name}</Text> : <></>}
-      {description ? <Text>Description: {description}</Text> : <></>}
-    </Flex>
+      {name ? <p>Name: {name}</p> : <></>}
+      {description ? <p>Description: {description}</p> : <></>}
+    </div>
   );
 };
