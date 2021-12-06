@@ -5,8 +5,8 @@ import { ERC721Minter } from "./components/ERC721Minter";
 import { ERC721Checker } from "./components/ERC721Checker";
 import { bunzz } from "bunzz-sdk";
 
-const DAPP_ID = "894aa415-13c8-4e9a-91b7-7030b9b9d675";
-const API_KEY = "d8e59bab-7498-4fc0-8a6d-39ae6cb99c39";
+const DAPP_ID = process.env.REACT_APP_DAPP_ID;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const App = () => {
   const [handler, setHandler] = useState();
