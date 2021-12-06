@@ -3,8 +3,8 @@ import { bunzz } from "bunzz-sdk";
 
 import "./App.css";
 
-const DAPP_ID = "YOUR_DAPP_ID";
-const API_KEY = "YOUR_API_KEY";
+const DAPP_ID = "53335d55-1e83-4063-9765-328473944538";
+const API_KEY = "96e30a94-7248-4ffe-94ce-3cf73c69b707";
 
 const init = async () => {
   const handler = await bunzz.initializeHandler({
@@ -25,7 +25,7 @@ const App = () => {
         const handler = await init();
 
         const userAddress = await handler.getSignerAddress();
-        const contract = await handler.getContract("ERC20");
+        const contract = await handler.getContract("Token (ERC20)");
 
         setUserAddress(userAddress);
         setContract(contract);
