@@ -3,8 +3,8 @@ import { bunzz } from "bunzz-sdk";
 
 import "./App.css";
 
-const DAPP_ID = "53335d55-1e83-4063-9765-328473944538";
-const API_KEY = "96e30a94-7248-4ffe-94ce-3cf73c69b707";
+const DAPP_ID = process.env.REACT_APP_DAPP_ID;
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const init = async () => {
   const handler = await bunzz.initializeHandler({
